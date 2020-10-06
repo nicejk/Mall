@@ -1,2 +1,3 @@
+include ':mall-library'
 include ':app'
 rootProject.name = "Mall"
