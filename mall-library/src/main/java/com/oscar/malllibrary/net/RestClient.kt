@@ -1,6 +1,9 @@
 package com.oscar.malllibrary.net
 
+import android.content.Context
 import com.oscar.malllibrary.net.callback.*
+import com.oscar.malllibrary.ui.loader.LoaderStyles
+import com.oscar.malllibrary.ui.loader.MallLoader
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.*
@@ -16,7 +19,9 @@ class RestClient internal constructor(
     private val success: ISuccess?,
     private val failure: IFailure?,
     private val error: IError?,
-    private val complete: IComplete?
+    private val complete: IComplete?,
+    private val context: Context?,
+    private val loaderStyles: LoaderStyles?
 ) {
 
     companion object {
@@ -29,6 +34,10 @@ class RestClient internal constructor(
         val service = RestCreator.restService
         val call: Call<String>?
         request?.onRequestStart()
+
+        if (loaderStyles != null) {
+            MallLoader.showLoading(context, loaderStyles)
+        }
 
         call = when (method) {
             HttpMethod.GET -> service.get(url, params)
@@ -44,7 +53,7 @@ class RestClient internal constructor(
     }
 
     private val requestCallback: Callback<String>
-        get() = RequestCallbacks(request, success, error, failure, complete)
+        get() = RequestCallbacks(request, success, error, failure, complete, loaderStyles)
 
     fun get() {
         request(HttpMethod.GET)

@@ -1,6 +1,8 @@
 package com.oscar.malllibrary.net
 
+import android.content.Context
 import com.oscar.malllibrary.net.callback.*
+import com.oscar.malllibrary.ui.loader.LoaderStyles
 import java.util.*
 
 /**
@@ -13,8 +15,9 @@ class RestClientBuilder(
     private var success: ISuccess? = null,
     private var failure: IFailure? = null,
     private var error: IError? = null,
-    private var complete: IComplete? = null
-
+    private var complete: IComplete? = null,
+    private var context: Context? = null,
+    private var loaderStyles: LoaderStyles? = null
 ) {
 
     private val mParams = WeakHashMap<String, Any>()
@@ -59,7 +62,19 @@ class RestClientBuilder(
         return this
     }
 
+    fun loader(context: Context?, loaderStyles: LoaderStyles?): RestClientBuilder {
+        this.context = context
+        this.loaderStyles = loaderStyles
+        return this
+    }
+
+    fun loader(context: Context?): RestClientBuilder {
+        this.context = context
+        this.loaderStyles = LoaderStyles.BallClipRotateMultipleIndicator
+        return this
+    }
+
     fun build(): RestClient {
-        return RestClient(url, mParams, request, success, failure, error, complete)
+        return RestClient(url, mParams, request, success, failure, error, complete, context, loaderStyles)
     }
 }

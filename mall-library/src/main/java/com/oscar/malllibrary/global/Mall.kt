@@ -1,6 +1,8 @@
 package com.oscar.malllibrary.global
 
+import android.app.Application
 import android.content.Context
+import com.blankj.utilcode.util.Utils
 import com.oscar.malllibrary.util.storage.MemoryStore
 
 /**
@@ -13,6 +15,7 @@ object Mall {
 
     fun init(context: Context): Configurator {
         MemoryStore.instance.addData(GlobalKeys.APPLICATION_CONTEXT, context.applicationContext)
+        Utils.init(context as Application?)
         return Configurator.instance
     }
 

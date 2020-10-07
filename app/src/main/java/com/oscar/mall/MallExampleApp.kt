@@ -11,7 +11,8 @@ class MallExampleApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Mall.init(this)
-            .withApiHost("http://192.168.123")
+            .withLoaderDelayed(5000)
+            .withApiHost("http://mock.fulingjie.com/mock/api/")
             .configure()
     }
 }

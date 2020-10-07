@@ -37,6 +37,14 @@ class Configurator private constructor() {
     }
 
     /**
+     * 加载进度
+     */
+    fun withLoaderDelayed(delayed: Long): Configurator {
+        mStore.addData(GlobalKeys.LOADER_DELAYED, delayed)
+        return this
+    }
+
+    /**
      * 配置
      */
     fun configure() {
