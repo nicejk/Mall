@@ -1,8 +1,8 @@
 package com.oscar.malllibrary.ui.loader
 
 import android.content.Context
+import android.support.v7.app.AppCompatDialog
 import android.view.Gravity
-import androidx.appcompat.app.AppCompatDialog
 import com.blankj.utilcode.util.ScreenUtils
 import com.oscar.malllibrary.R
 import com.wang.avi.AVLoadingIndicatorView
